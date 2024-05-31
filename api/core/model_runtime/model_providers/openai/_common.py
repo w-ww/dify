@@ -28,6 +28,8 @@ class _CommonOpenAI:
         if credentials.get('openai_api_base'):
             credentials['openai_api_base'] = credentials['openai_api_base'].rstrip('/')
             credentials_kwargs['base_url'] = credentials['openai_api_base'] + '/v1'
+            import httpx
+            credentials_kwargs['http_client'] = httpx.Client(verify=False)
 
         if 'openai_organization' in credentials:
             credentials_kwargs['organization'] = credentials['openai_organization']
